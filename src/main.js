@@ -7,6 +7,7 @@ import router from './router'
 import VueLazyload from 'vue-lazyload'
 // 引入公用方法库
 import format from './utils/utils'
+import store from './store'
 
 // 解决移动端300ms延迟
 const FastClick = require('fastclick')
@@ -28,6 +29,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

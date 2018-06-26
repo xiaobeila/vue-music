@@ -1,39 +1,45 @@
 <template>
   <div id="recommend">
     <headerNav tabIndex="0"></headerNav>
-    <swiper :list="demo01_list" v-model="demo01_index" @on-index-change="demo01_onIndexChange"></swiper>
+    <!--轮播开始-->
+    <swiper loop auto :aspect-ratio="300/800" dots-position="center">
+      <swiper-item v-for="(item,i) in bannerList" :key="i">
+        <img width="100%" height="100%" v-lazy="item.picUrl">
+      </swiper-item>
+    </swiper>
+    <!--轮播结束-->
   </div>
 </template>
 
 <script>
 import headerNav from '@/components/headerNav'
-import { Swiper } from 'vux'
-
-const baseList = [{
-  url: 'javascript:',
-  img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vvsr72j20p00gogo2.jpg',
-  title: '送你一朵fua'
-}, {
-  url: 'javascript:',
-  img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw1k2wj20p00goq7n.jpg',
-  title: '送你一辆车'
-}, {
-  url: 'javascript:',
-  img: 'https://static.vux.li/demo/5.jpg',
-  title: '送你一次旅行',
-  fallbackImg: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg'
-}]
+import {
+  Swiper,
+  SwiperItem
+} from 'vux'
+import {
+  mapState
+} from 'vuex'
 
 export default {
   name: 'recommend',
   data () {
-    return {
-      demo01_list: baseList
-    }
+    return {}
   },
   components: {
     headerNav,
-    Swiper
+    Swiper,
+    SwiperItem
+  },
+  created () {
+    // 页面初始化
+    this.$store.dispatch('initRecommendPage')
+  },
+  computed: {
+    ...mapState({
+      // 获取banner图
+      bannerList: state => state.recommend.bannerList
+    })
   }
 }
 </script>
