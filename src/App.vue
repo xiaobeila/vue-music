@@ -1,12 +1,26 @@
 <template>
   <div id="app" v-cloak>
+    <music></music>
+    <loading v-model="isLoading"></loading>
     <router-view/>
   </div>
 </template>
 
 <script>
+import music from './components/music'
+import { Loading } from 'vux'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    music,
+    Loading
+  },
+  computed: {
+    isLoading () {
+      return this.$store.state.isLoading
+    }
+  }
 }
 </script>
 
