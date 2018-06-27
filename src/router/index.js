@@ -4,6 +4,10 @@ Vue.use(Router)
 
 // 个性推荐
 const recommend = r => require.ensure([], () => r(require('../page/recommend/recommend')), 'recommend')
+// 歌单详情
+const songListDetails = r => require.ensure([], () => r(require('../page/songListDetails/songListDetails')), 'songListDetails')
+// 歌曲详情
+const songDetails = r => require.ensure([], () => r(require('../page/songDetails/songDetails')), 'songDetails')
 
 export default new Router({
   routes: [
@@ -15,6 +19,15 @@ export default new Router({
       path: '/recommend',
       name: 'recommend',
       component: recommend
+    }, {
+      path: '/songListDetails/:id',
+      name: 'songListDetails',
+      component: songListDetails
+    },
+    {
+      path: '/songDetails/:id',
+      name: 'songDetails',
+      component: songDetails
     }
   ]
 })
