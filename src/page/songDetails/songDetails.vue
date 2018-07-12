@@ -19,6 +19,9 @@
           </ul>
         </div>
       </div>
+      <div class="playContxt-f">
+        <player></player>
+      </div>
     </div>
     <div class="masking">
       <div class="cover-bg" :style="{backgroundImage:'url('+ songDetails.songs[0].al.picUrl+')'}"></div>
@@ -31,6 +34,8 @@
 import {
   mapState
 } from 'vuex'
+import player from './children/player'
+import bottomSongList from '../../components/bottomSongList'
 
 export default {
   name: 'songDetails',
@@ -39,7 +44,10 @@ export default {
       showLyric: false
     }
   },
-  components: {},
+  components: {
+    player,
+    bottomSongList
+  },
   created () {
     this.$store.dispatch('get_playSongDetails', this.$route.params.id)
   },
@@ -66,5 +74,5 @@ export default {
 </script>
 
 <style lang="less">
-  @import './songDetails';
+@import "./songDetails";
 </style>

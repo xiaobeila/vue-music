@@ -36,5 +36,34 @@ export default {
     context.dispatch('get_Lyric', {
       id: payload
     })
+  },
+
+  // 上一曲,下一曲
+  async go_switchSongs (context, payload) {
+    let songList = context.rootState.songListDetails.tracks
+    var status = false
+    if (songList.length > 0) {
+      for (let i = 0; i < songList.length; i++) {
+        if (songList[i].id === payload.id) {
+          status = true
+          if (payload.type === 'prev') {
+            if (i === 0) {
+              return songList[songList.length - 1].id
+            } else {
+              return songList[i - 1].id
+            }
+          } else {
+            if (i === songList.length - 1) {
+              return songList[0].id
+            } else {
+              return songList[i + 1].id
+            }
+          }
+        }
+      }
+      if (status === false) {
+        return false
+      }
+    }
   }
 }

@@ -17,9 +17,9 @@ export default {
       // 音乐url
       musicUrl: state => state.playSongs.musicUrl,
       // 播放状态
-      playStatus: state => state.playSong.playStatus,
+      playStatus: state => state.playSongs.playStatus,
       // 当前音乐url
-      curMusic: state => state.playSong.curMusic,
+      curMusic: state => state.playSongs.curMusic,
       // 歌单
       songListDetails: state => state.songListDetails.tracks
     })
@@ -40,13 +40,13 @@ export default {
           id: this.$route.params.id,
           type: 'next'
         }
-        this.$store.dispatch('go_SwitchSongs', obj).then((res) => {
+        this.$store.dispatch('go_switchSongs', obj).then((res) => {
           if (res === false) {
             this.$refs.player.pause()
             this.$store.commit('set_playStatus', false)
             this.$store.commit('set_musicCurtime', 0)
           } else {
-            this.$store.dispatch('get_PlaySongDetails', res)
+            this.$store.dispatch('get_playSongDetails', res)
             this.$router.push({
               name: 'songDetails',
               params: {
